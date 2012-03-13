@@ -376,8 +376,8 @@ public class DroidGap extends Activity implements CordovaInterface {
         settings.setNavDump(true);
 
         // Enable database
-        settings.setDatabaseEnabled(true);
-        String databasePath = this.getApplicationContext().getDir("database", Context.MODE_PRIVATE).getPath(); 
+        settings.setDatabaseEnabled(true);        
+        String databasePath = "/data/data/" + this.getApplicationInfo().packageName + "/databases/"; 
         settings.setDatabasePath(databasePath);
 
         // Enable DOM storage
