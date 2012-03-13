@@ -118,7 +118,22 @@ public class Storage extends Plugin {
 	// --------------------------------------------------------------------------
 	// LOCAL METHODS
 	// --------------------------------------------------------------------------
-
+        
+        /**
+	 * Set the application package for the database. Each application saves its
+	 * database files in a directory with the application package as part of the
+	 * file name.
+	 *
+	 * For example, application "com.phonegap.demo.Demo" would save its database
+	 * files in "/data/data/com.phonegap.demo/databases/" directory.
+	 *
+	 * @param appPackage
+	 *            The application package.
+	 */
+	public void setStorage(String appPackage) {
+		this.path = "/data/data/" + appPackage + "/databases/";
+	}
+	
 	/**
 	 * Open database.
 	 * 
@@ -141,10 +156,12 @@ public class Storage extends Plugin {
 
 		// If no database path, generate from application package
 		if (this.path == null) {
-			this.path = this.ctx.getApplicationContext().getDir("database", Context.MODE_PRIVATE).getPath();
+			Package pack = this.ctx.getClass().getPackage();
+			String appPackage = pack.getName();
+			this.setStorage(appPackage);
 		}
 
-		this.dbName = this.path + File.pathSeparator + db + ".db";
+		this.dbName = this.path + db + ".db";
 		this.myDb = SQLiteDatabase.openOrCreateDatabase(this.dbName, null);
 	}
 
