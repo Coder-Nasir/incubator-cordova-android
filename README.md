@@ -28,6 +28,9 @@ To create your cordova.jar, run in the framework directory:
     android update project -p . -t android-15
     ant jar
 
+After creating your cordova.jar file, you can find your cordova.js file in directory:
+
+    ~/framework/assets/www/
 
 Cordova Android Developer Tools
 ---
